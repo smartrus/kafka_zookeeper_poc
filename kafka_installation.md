@@ -1,5 +1,7 @@
 # Installing a Kafka broker
 
+## Standalone Kafka broker installation
+
 ```
 # tar -zxf kafka_2.12-1.1.0.tgz
 # mv kafka_2.12-1.1.0 /usr/local/kafka
@@ -7,7 +9,7 @@
 # /usr/local/kafka/config/server.properties
 ####### Add the following lines:
 port = 9092
-advertised.host.name = localhost 
+advertised.host.name = localhost
 # /usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
 ```
 
@@ -41,3 +43,22 @@ message 3
 ^C
 Consumed 3 messages
 ```
+
+## A broker configuration for a cluster
+
+* broker.id - Kafka broker identifier
+* port - default TCP port is 9092
+* zookeeper.connect - Zookeeper settings for storing a broker metadata
+** hostname
+** port
+** /path, an optional Zookeeper path to use as a chroot environment for the Kafka
+cluster. If it is omitted, the root path is used.
+* log.dirs - log directory
+* num.recovery.threads.per.data.dir - a configurable pool of threads for handling log segments.
+* auto.create.topics.enable - automatically creates a topic 1) when a producer starts writing messages to the topic 2) when a consumer starts reading messages from the topic 3) when any client requests metadata for the topic
+* num.partitions - how many partitions a new topic is created with
+* log.retention.ms - how long Kafka will retain messages
+* log.retention.bytes - expire messages based on the total number of bytes of messages retained
+* log.segment.bytes - the current log segment size
+* log.segment.ms - the amount of time after which a log segment should be closed
+* message.max.bytes - limits the maximum size of a message
